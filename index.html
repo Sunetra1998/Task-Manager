@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+
+</head>
+
+<body>
+    <div>
+        <div id="myDiv" class="header">
+            <h2 style="margin: 5px;">My To Do List</h2>
+            <input type="text" id="myInput" placeholder="Title" />
+            <span onclick="newElement()" class="addBtn">Add</span>
+        </div>
+        <ul id="myUL">
+            <li>Exercise for 30mins</li>
+            <li>Take a break</li>
+            <li>Take a shower and be fresh</li>
+            <li>Sit down to study</li>
+            <li>Have Lunch</li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript">
+    var myNodelist = document.getElementsByTagName("li");
+    var i;
+    for (i = 0; i < myNodelist.length; i++) {
+        //As delete button will be there with every element
+        // We need to craete a dynamic tag
+        // We will use span as it will  take the necessary space beside the text
+        var span = document.createElement("SPAN");
+        var text = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(text);
+        myNodelist[i].appendChild(span);
+    }
+    var cls = document.getElementsByClassName("close");
+    for (i = 0; i < cls.length; i++) {
+        cls[i].onclick = function () {
+            var div = this.parentElement;
+            div.style.display = "none";
+        }
+    }
+    function newElement() {
+        //Fetch text value from the input field
+        //create LI tag
+        // create textnode and append value as above
+        // sanitasation is the process of checking the input value is valid or not
+        // Append the LI to the UL tag
+        var input = document.getElementById("myInput").value;
+        if (input.length === 0) {
+            alert("Please enter the text");
+        } else {
+            var li=document.createElement("li");
+            document.getElementById("myUL").appendChild(li);
+        }
+        //var li = document.createElement("li");
+        var text = document.createTextNode(input);
+        li.appendChild(text);
+         document.getElementById("myInput").value = "";
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+        for (i = 0; i < cls.length; i++) {
+            cls[i].onclick = function () {
+                var div = this.parentElement;
+                div.style.display = "none";
+            }
+        }
+
+
+    }
+
+</script>
+
+</html>
